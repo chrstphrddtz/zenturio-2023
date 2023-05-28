@@ -2,26 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+    /* --max-width: 1100px; */
+    --border-radius: 12px;
+    --primaryColor: 70, 70, 70;
+    --secondaryColor: 233, 233, 233;
+    --accentColor: 226, 172, 85;
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/*     
+    --picker-active-bg-color: rgb(233, 233, 233) ;
+    --picker-active-text-color: rgb(70, 70, 70) !important;
+    --picker-border-color: rgb(233, 233, 233) !important;
+    --picker-text-color: rgb(70, 70, 70) !important;
+    --picker-border-radius: 8px !important;
+    --picker-hover-border-color: rgb(233, 233, 233) !important; */
+
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    width: auto;
+    letter-spacing: 0.075rem;
+  }
+
+  body,
+  textarea,
+  input {
+    background-color: rgb(var(--primaryColor));
+    color: rgb(var(--secondaryColor));
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+    padding: 2rem;
+    /* min-height: 100vh; */
+  }
 }
