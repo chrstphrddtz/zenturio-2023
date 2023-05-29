@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Button from "../dashboard/Button";
 
 export default function Table() {
@@ -17,11 +18,8 @@ export default function Table() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await fetch(`/api/data?page=${page}`);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        const data = await response.json();
+        const response = await axios.get(`/api/data?page=${page}`);
+        const data = response.data;
 
         setEntries((prevEntries) => [...prevEntries, ...data.paginatedData]);
         setHasMore(data.totalPages > page);
@@ -33,6 +31,27 @@ export default function Table() {
 
     fetchData();
   }, [page]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       setLoading(true);
+  //       const response = await fetch(`/api/data?page=${page}`);
+  //       if (!response.ok) {
+  //         throw new Error(response.statusText);
+  //       }
+  //       const data = await response.json();
+
+  //       setEntries((prevEntries) => [...prevEntries, ...data.paginatedData]);
+  //       setHasMore(data.totalPages > page);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, [page]);
 
   function handleSort(column) {
     const newSortConfig = { sortBy: column, direction: "asc" };
